@@ -18,16 +18,19 @@ pipeline {
                 bat 'mvn clean package'
             }
         }
+stage('Test & Coverage') {
+    steps {
+        sh 'mvn clean test'
+    }
+}
 
-        stage('Unit Tests + Coverage') {
-            steps {
-                bat 'mvn clean test jacoco:report'
-            }
-        }
-
-        stage('Archive Test Results') {
-            steps {
-                junit '**/target/surefire-reports/*.xml'
+stage('Archive Test Results') {
+    steps {
+        junit 'target/surefire-reports/*.xml'
+        archiveArtifacts 'target/site/jacoco/*'
+    }
+}
+       
             }
         }
 
