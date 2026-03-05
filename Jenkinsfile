@@ -31,8 +31,3 @@ stage('Archive Test Results') {
     }
 }
        
-            }
-        }
-
-    }
-}
