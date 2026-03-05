@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'Maven'
+    }
+
     stages {
 
         stage('Checkout') {
@@ -21,10 +25,11 @@ pipeline {
             }
         }
 
-        stage('Archive Coverage Report') {
+        stage('Archive Test Results') {
             steps {
-                archiveArtifacts artifacts: 'target/site/jacoco/**'
+                junit '**/target/surefire-reports/*.xml'
             }
         }
+
     }
 }
